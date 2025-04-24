@@ -1,0 +1,147 @@
+body {
+    header {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        text-align: center;
+        font-size: 24px;
+    }
+    body {
+        background-color: #fffefc;
+        font-family: "Courier New", Garamond, sans-serif;
+        font-weight: 400;
+        text-align: center;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh; /* Заполняет всю высоту экрана */
+        padding: 20px;
+        box-sizing: border-box; /* Учитывает padding в высоте */
+        overflow: hidden; /* Скрывает переполнение */
+        margin-top: 80px;
+
+      }
+    h1 {
+        height: 20px;
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+        font-family: 'Courier New', sans-serif;
+    }
+    
+    h2 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+    
+    p {
+        font-size: 20px;
+        color: #333;
+        max-width: 80%;
+        margin: 0 auto 20px;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+        background-color: #333;
+    }
+    
+    select {
+        font-size: 16px;
+        padding: 8px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }    
+
+    #plot {
+        margin: 30px auto;
+        width: 100%;  /* Устанавливаем 100% от родительского контейнера */
+        max-width: 1200px;  /* Увеличиваем максимальную ширину */
+        height: 800px;  /* Увеличиваем высоту */
+        padding: 0;  /* Убираем padding */
+    }
+    
+    #plotly-graph {
+        width: 100% !important;  /* Обязательно устанавливаем 100% ширины */
+        height: 100% !important;  /* Обязательно устанавливаем 100% высоты */
+    }
+    
+    math-field {
+        margin-top: 5px;
+        display: block;
+        width: 100%;
+    }
+
+    
+
+    .navbar {
+        background-color: rgb(246, 245, 240);
+        color: #333;
+        border-radius: 15px;
+        padding: 10px 20px;
+        position: absolute;
+        /* Используем абсолютное позиционирование */
+        top: 20px;
+        /* Располагаем меню на 20 пикселей ниже верхней границы */
+        right: 50px;
+        /* Располагаем меню на 20 пикселей от левого края */
+        width: fit-content;
+        z-index: 1000;
+    }
+
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    .navbar li {
+        margin-right: 20px;
+    }
+
+    .navbar a {
+        color: #333;
+        text-decoration: none;
+        font-size: 18px;
+        transition: background-color 0.3s;
+        padding: 5px 10px;
+        border-radius: 10px;
+    }
+
+    .navbar a:hover {
+        background-color: #ffffff;
+    }
+    .footer{
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        text-align: center;
+        font-size: 50px;
+        color: #333;
+        background-color: #f8edcdfe;
+    }
+
+}

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
   <title>Графики функций</title>
   <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.min.js"></script>
@@ -19,7 +21,7 @@
           { id: 'zExpr', label: 'z(t) =', value: 't / 10' }
         ],
         polar: [
-          { id: 'rExpr', label: 'r(θ) =', value: '2 + sin(3 * theta)' }
+          { id: 'rExpr', label: 'r(theta) =', value: '2 + sin(3 * theta)' }
         ]
       };
 
@@ -178,7 +180,7 @@
               const r = rParsed.evaluate({ theta });
               x.push(r * Math.cos(theta));
               y.push(r * Math.sin(theta));
-              z.push(0); // можно заменить на r или theta для эффекта
+              z.push(theta); // можно заменить на r или theta для эффекта
             } catch {
               x.push(null); y.push(null); z.push(null);
             }
@@ -200,70 +202,45 @@
       };
     });
   </script>
-
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background: #4a90e2;
-      color: white;
-      padding: 1rem;
-    }
-
-    main {
-      padding: 2rem;
-    }
-
-    #plot {
-      margin: 30px auto;
-      width: 90%;
-      max-width: 900px;
-      height: 600px;
-    }
-
-    label {
-      font-weight: bold;
-      display: inline-block;
-      margin-right: 10px;
-    }
-
-    math-field {
-      margin-top: 5px;
-    }
-  </style>
 </head>
 
 <body>
-  <header>
-    <h1>Графики функций</h1>
-  </header>
+  <nav class="navbar"> <!-- Navigation bar -->
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="funcion_graph.html">Графики функци</a></li>
+      <li><a href="#">О нас</a></li>
+    </ul>
+  </nav>
 
   <main>
-    <h2>Выбор типа функции</h2>
-    <label for="mode">Тип графика:</label>
-    <select id="mode">
-      <option value="explicit">Обычный: z = f(x, y)</option>
-      <option value="implicit">Неявный: F(x, y) = 0</option>
-      <option value="parametric">Параметрический: x(t), y(t), z(t)</option>
-      <option value="polar">Полярный: r(θ)</option>
-    </select>
+    <div class="container">
+      <h1>Графики функций</h1>
+      <p>Выберите тип функции и введите выражение для построения графика.</p>
+      <!-- Dropdown для выбора типа графика -->
+      <label for="mode">Тип графика:</label>
+      <select id="mode" style="margin-bottom: 15px;">
+        <option value="explicit">Обычный: z = f(x, y)</option>
+        <option value="implicit">Неявный: F(x, y) = 0</option>
+        <option value="parametric">Параметрический: x(t), y(t), z(t)</option>
+        <option value="polar">Полярный: r(θ)</option>
+      </select>
 
-    <div id="inputs" style="margin-top: 20px;"></div>
+      <!-- Поля для ввода выражений, будет обновляться в зависимости от типа графика -->
+      <div id="inputs" style="margin-top: 20px;"></div>
 
-    <button onclick="plotGraph()" style="margin-top: 20px;">Построить</button>
+      <!-- Кнопка для построения графика -->
+      <button onclick="plotGraph()">Построить</button>
 
-    <div id="plot"></div>
+      <!-- Место для отображения графика -->
+      <div id="plot"></div>
+
+    </div>
   </main>
 
-  <footer>
+  <footer class="footer"> <!-- Footer -->
     <p>&copy; 2025 Мой сайт. Все права защищены.</p>
   </footer>
 </body>
+
 </html>
