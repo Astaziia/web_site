@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Графики функций</title>
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.min.js"></script>
+  <script type="module">
+    import { MathfieldElement } from 'https://unpkg.com/mathlive?module';
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const mathFields = {
+        explicit: [{ id: 'zExpr', label: 'z = f(x, y)', value: 'sin(x) * cos(y)' }],
+        implicit: [{ id: 'FExpr', label: 'F(x, y) = 0', value: 'x^2 + y^2 - 9' }],
+        parametric: [
+          { id: 'xExpr', label: 'x(t) =', value: 'cos(t)' },
+          { id: 'yExpr', label: 'y(t) =', value: 'sin(t)' },
+          { id: 'zExpr', label: 'z(t) =', value: 't / 10' }
+        ],
+        polar: [
+          { id: 'rExpr', label: 'r(θ) =', value: '2 + sin(3 * theta)' }
+        ]
+      };
+
+      const inputArea = document.getElementById('inputs');
+      const selector = document.getElementById('mode');
+
+      function createField(field) {
+        const div = document.createElement('div');
+        div.style.marginBottom = '10px';
+
+        const label = document.createElement('label');
+        label.innerText = field.label;
+        div.appendChild(label);
+
+        const mf = new MathfieldElement();
+        mf.id = field.id;
+        mf.value = field.value;
+        mf.style.marginLeft = "10px";
+        mf.style.width = "300px";
+        div.appendChild(mf);
+
+        inputArea.appendChild(div);
+      }
+
+      function updateFields(type) {
+        inputArea.innerHTML = '';
+        mathFields[type].forEach(createField);
+      }
+
+      function getVal(id) {
+        return document.getElementById(id)?.value ?? '';
+      }
+
+      selector.addEventListener('change', () => {
+        updateFields(selector.value);
+      });
+
+      updateFields(selector.value); // initial load
+
+      window.plotGraph = function () {
+        const mode = selector.value;
+
+        if (mode === 'explicit') {
+          const expr = getVal('zExpr');
+          const parsed = math.parse(expr).compile();
+          const x = [], y = [], z = [];
+          const step = 0.5;
+
+          for (let i = -10; i <= 10; i += step) x.push(i);
+          for (let j = -10; j <= 10; j += step) y.push(j);
+
+          for (let i = 0; i < x.length; i++) {
+            const row = [];
+            for (let j = 0; j < y.length; j++) {
+              try {
+                const val = parsed.evaluate({ x: x[i], y: y[j] });
+                row.push(isFinite(val) ? val : null);
+              } catch {
+                row.push(null);
+              }
+            }
+            z.push(row);
+          }
+
+          Plotly.newPlot('plot', [{
+            x: x,
+            y: y,
+            z: z,
+            type: 'surface',
+            colorscale: 'Viridis'
+          }], {
+            title: `z = ${expr}`,
+            scene: { xaxis: { title: 'x' }, yaxis: { title: 'y' }, zaxis: { title: 'z' } },
+            margin: { l: 0, r: 0, b: 0, t: 50 }
+          });
+
+        } else if (mode === 'implicit') {
+          const expr = getVal('FExpr');
+          const parsed = math.parse(expr).compile();
+          const x = [], y = [], z = [];
+          const step = 0.25;
+
+          for (let i = -10; i <= 10; i += step) x.push(i);
+          for (let j = -10; j <= 10; j += step) y.push(j);
+
+          for (let i = 0; i < x.length; i++) {
+            const row = [];
+            for (let j = 0; j < y.length; j++) {
+              try {
+                row.push(parsed.evaluate({ x: x[i], y: y[j] }));
+              } catch {
+                row.push(null);
+              }
+            }
+            z.push(row);
+          }
+
+          Plotly.newPlot('plot', [{
+            type: 'contour',
+            x: x,
+            y: y,
+            z: z,
+            contours: { coloring: 'lines', showlabels: true },
+            line: { width: 2 },
+            showscale: false
+          }], {
+            title: `F(x, y) = 0: ${expr}`,
+            xaxis: { title: 'x' },
+            yaxis: { title: 'y' },
+            margin: { l: 0, r: 0, b: 0, t: 50 }
+          });
+
+        } else if (mode === 'parametric') {
+          const xExpr = getVal('xExpr');
+          const yExpr = getVal('yExpr');
+          const zExpr = getVal('zExpr');
+          const xParsed = math.parse(xExpr).compile();
+          const yParsed = math.parse(yExpr).compile();
+          const zParsed = math.parse(zExpr).compile();
+
+          const tValues = math.range(0, 10 * Math.PI, 0.1).toArray();
+          const x = [], y = [], z = [];
+
+          for (let t of tValues) {
+            try {
+              x.push(xParsed.evaluate({ t }));
+              y.push(yParsed.evaluate({ t }));
+              z.push(zParsed.evaluate({ t }));
+            } catch {
+              x.push(null); y.push(null); z.push(null);
+            }
+          }
+
+          Plotly.newPlot('plot', [{
+            type: 'scatter3d',
+            mode: 'lines',
+            x: x,
+            y: y,
+            z: z,
+            line: { color: 'blue', width: 4 }
+          }], {
+            title: 'Параметрическая кривая: x(t), y(t), z(t)',
+            scene: { xaxis: { title: 'x' }, yaxis: { title: 'y' }, zaxis: { title: 'z' } },
+            margin: { l: 0, r: 0, b: 0, t: 50 }
+          });
+
+        } else if (mode === 'polar') {
+          const rExpr = getVal('rExpr');
+          const rParsed = math.parse(rExpr).compile();
+
+          const thetaValues = math.range(0, 2 * Math.PI, 0.01).toArray();
+          const x = [], y = [], z = [];
+
+          for (let theta of thetaValues) {
+            try {
+              const r = rParsed.evaluate({ theta });
+              x.push(r * Math.cos(theta));
+              y.push(r * Math.sin(theta));
+              z.push(0); // можно заменить на r или theta для эффекта
+            } catch {
+              x.push(null); y.push(null); z.push(null);
+            }
+          }
+
+          Plotly.newPlot('plot', [{
+            type: 'scatter3d',
+            mode: 'lines',
+            x: x,
+            y: y,
+            z: z,
+            line: { color: 'purple', width: 4 }
+          }], {
+            title: `Полярная функция: r(θ) = ${rExpr}`,
+            scene: { xaxis: { title: 'x' }, yaxis: { title: 'y' }, zaxis: { title: 'z' } },
+            margin: { l: 0, r: 0, b: 0, t: 50 }
+          });
+        }
+      };
+    });
+  </script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #4a90e2;
+      color: white;
+      padding: 1rem;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    #plot {
+      margin: 30px auto;
+      width: 90%;
+      max-width: 900px;
+      height: 600px;
+    }
+
+    label {
+      font-weight: bold;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    math-field {
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Графики функций</h1>
+  </header>
+
+  <main>
+    <h2>Выбор типа функции</h2>
+    <label for="mode">Тип графика:</label>
+    <select id="mode">
+      <option value="explicit">Обычный: z = f(x, y)</option>
+      <option value="implicit">Неявный: F(x, y) = 0</option>
+      <option value="parametric">Параметрический: x(t), y(t), z(t)</option>
+      <option value="polar">Полярный: r(θ)</option>
+    </select>
+
+    <div id="inputs" style="margin-top: 20px;"></div>
+
+    <button onclick="plotGraph()" style="margin-top: 20px;">Построить</button>
+
+    <div id="plot"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Мой сайт. Все права защищены.</p>
+  </footer>
+</body>
+</html>
