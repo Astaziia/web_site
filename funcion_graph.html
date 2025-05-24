@@ -92,10 +92,11 @@
             z: z,
             type: 'surface',
             colorscale: 'Viridis'
+            
           }], {
             title: `z = ${expr}`,
             scene: { xaxis: { title: 'x' }, yaxis: { title: 'y' }, zaxis: { title: 'z' } },
-            margin: { l: 0, r: 0, b: 0, t: 50 }
+            margin: { l: 0, r: 0, b: 0, t: 50 },
           });
 
         } else if (mode === 'implicit') {
@@ -205,6 +206,7 @@
 </head>
 
 <body>
+  <div class="wrapper"></div>
   <nav class="navbar"> <!-- Navigation bar -->
     <ul>
       <li><a href="home.html">Home</a></li>
@@ -233,11 +235,13 @@
       <button onclick="plotGraph()">Построить</button>
 
       <!-- Место для отображения графика -->
+      
       <div id="plot"></div>
+  
 
     </div>
   </main>
-
+</div>
   <footer class="footer"> <!-- Footer -->
     <p>&copy; 2025 Мой сайт. Все права защищены.</p>
   </footer>

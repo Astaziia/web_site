@@ -16,6 +16,8 @@ body {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
     }
     .container {
         display: flex;
@@ -23,10 +25,8 @@ body {
         justify-content: center;
         align-items: center;
         text-align: center;
-        height: 100vh; /* Заполняет всю высоту экрана */
         padding: 20px;
         box-sizing: border-box; /* Учитывает padding в высоте */
-        overflow: hidden; /* Скрывает переполнение */
         margin-top: 80px;
 
       }
@@ -74,26 +74,13 @@ body {
         border: 1px solid #ccc;
     }    
 
-    #plot {
-        margin: 30px auto;
-        width: 100%;  /* Устанавливаем 100% от родительского контейнера */
-        max-width: 1200px;  /* Увеличиваем максимальную ширину */
-        height: 800px;  /* Увеличиваем высоту */
-        padding: 0;  /* Убираем padding */
-    }
-    
-    #plotly-graph {
-        width: 100% !important;  /* Обязательно устанавливаем 100% ширины */
-        height: 100% !important;  /* Обязательно устанавливаем 100% высоты */
-    }
-    
+
+
     math-field {
         margin-top: 5px;
         display: block;
         width: 100%;
     }
-
-    
 
     .navbar {
         background-color: rgb(246, 245, 240);
@@ -129,19 +116,17 @@ body {
         padding: 5px 10px;
         border-radius: 10px;
     }
-
+    .wrapper{
+        flex:1;
+    }
     .navbar a:hover {
         background-color: #ffffff;
     }
-    .footer{
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        right: 10px;
-        text-align: center;
-        font-size: 50px;
-        color: #333;
-        background-color: #f8edcdfe;
-    }
+.footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 1em;
+  margin-top: 40px;
+}
 
 }
