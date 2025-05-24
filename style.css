@@ -83,7 +83,7 @@ body {
     }
 
     .navbar {
-        background-color: rgb(246, 245, 240);
+        background-color: rgb(252, 245, 211);
         color: #333;
         border-radius: 15px;
         padding: 10px 20px;
@@ -123,7 +123,7 @@ body {
         background-color: #ffffff;
     }
 .footer {
-  background-color: #f1f1f1;
+  background-color: rgb(252, 245, 211);
   text-align: center;
   padding: 1em;
   margin-top: 40px;
