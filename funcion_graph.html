@@ -92,7 +92,7 @@
             z: z,
             type: 'surface',
             colorscale: [[0, '#b591d9'], [1, '#b591d9']]
-            
+
           }], {
             title: `z = ${expr}`,
             scene: { xaxis: { title: 'x' }, yaxis: { title: 'y' }, zaxis: { title: 'z' } },
@@ -181,7 +181,7 @@
               const r = rParsed.evaluate({ theta });
               x.push(r * Math.cos(theta));
               y.push(r * Math.sin(theta));
-              z.push(theta); 
+              z.push(theta);
             } catch {
               x.push(null); y.push(null); z.push(null);
             }
@@ -205,12 +205,14 @@
   </script>
 </head>
 
+
 <body>
   <div class="wrapper"></div>
   <nav class="navbar"> <!-- Navigation bar -->
     <ul>
       <li><a href="home.html">Home</a></li>
       <li><a href="funcion_graph.html">Графики функци</a></li>
+      <li><a href="№">Объемы и площади графиков функций</a></li>
       <li><a href="#">О нас</a></li>
     </ul>
   </nav>
@@ -235,21 +237,42 @@
       <button onclick="plotGraph()">Построить</button>
 
       <!-- Место для отображения графика -->
-      
+
       <div id="plot"></div>
-  
 
     </div>
   </main>
-</div>
+
+  
   <footer class="footer"> <!-- Footer -->
-    <p>
-      Мы будем очень рады обратной связи и предложениям по улучшению сайта.
-    </p>
-    <p> 
-      Пожалуйста свяжитесь с одним из разработчиков:
-      
-    </p>
+    <p2>
+      Мы будем очень рады обратной связи и предложениям по улучшению сайта.<br>
+    </p2>
+
+    <p2>
+      Пожалуйста свяжитесь с одним из разработчиков: <br>
+      <a href="https://t.me/kris05_054566" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/telegram.svg" alt="Telegram" width="24"
+          style="vertical-align: middle;">
+        Крис <br>
+      </a>
+      <a href="https://t.me/jageun_nabi" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/telegram.svg" alt="Telegram" width="24"
+          style="vertical-align: middle;">
+        Рушана<br>
+      </a>
+      <a href="https://t.me/hestau" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/telegram.svg" alt="Telegram" width="24"
+          style="vertical-align: middle;">
+        Настя<br>
+      </a>
+    </p2>
+
+    <p3>
+      Сайт был разработан в рамках курсового проекта по дисциплине «Проектная деятельность».
+      Разработка велась с использованием HTML, CSS и JavaScript. Проект нацелен на
+      улучшение восприятия математических объектов путём визуального анализа.
+    </p3>
   </footer>
 </body>
 

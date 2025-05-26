@@ -7,6 +7,7 @@ body {
         text-align: center;
         font-size: 24px;
     }
+
     body {
         background-color: #fffefc;
         font-family: "Courier New", Garamond, sans-serif;
@@ -19,6 +20,7 @@ body {
         display: flex;
         flex-direction: column;
     }
+
     .container {
         display: flex;
         flex-direction: column;
@@ -26,10 +28,12 @@ body {
         align-items: center;
         text-align: center;
         padding: 20px;
-        box-sizing: border-box; /* Учитывает padding в высоте */
+        box-sizing: border-box;
+        /* Учитывает padding в высоте */
         margin-top: 80px;
 
-      }
+    }
+
     h1 {
         height: 20px;
         font-size: 28px;
@@ -37,20 +41,51 @@ body {
         margin-bottom: 20px;
         font-family: 'Courier New', sans-serif;
     }
-    
+
     h2 {
         font-size: 28px;
         color: #333;
         margin-bottom: 15px;
     }
-    
+
     p {
         font-size: 20px;
         color: #333;
         max-width: 80%;
         margin: 0 auto 20px;
     }
-    
+
+    .home {
+        text-align: justify;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+        /* Учитывает padding в высоте */
+        margin-top: 80px;
+        
+    }
+
+    .features {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .features img {
+        max-width: 300px;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .features-text {
+        flex: 1;
+    }
+
     button {
         padding: 10px 20px;
         font-size: 18px;
@@ -61,18 +96,18 @@ body {
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-    
+
     button:hover {
         background-color: rgb(252, 245, 211);
     }
-    
+
     select {
         font-size: 16px;
         padding: 8px;
         margin-bottom: 15px;
         border-radius: 5px;
         border: 1px solid #ccc;
-    }    
+    }
 
 
 
@@ -116,17 +151,28 @@ body {
         padding: 5px 10px;
         border-radius: 10px;
     }
-    .wrapper{
-        flex:1;
+
+    .wrapper {
+        flex: 1;
     }
+
     .navbar a:hover {
         background-color: #ffffff;
     }
-.footer {
-  background-color: rgb(252, 245, 211);
-  text-align: center;
-  padding: 1em;
-  margin-top: 40px;
-}
+
+    .footer {
+        background-color: rgb(252, 245, 211);
+        text-align: center;
+        padding: 1em;
+        margin-top: 40px;
+    }
+
+    a {
+        color: #333;
+        /* Наследовать цвет от родителя */
+        text-decoration: none;
+        /* Убрать подчёркивание */
+    }
+
 
 }
